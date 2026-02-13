@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Message for the Gang Leader ❤️</title>
+    <style>
+        :root {
+            --primary-pink: #ff4d6d;
+            --bg-pink: #fde2e4;
+            --text-color: #d63384;
+            --shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: var(--bg-pink);
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 30px;
+            box-shadow: var(--shadow);
+            width: 420px;
+            min-height: 500px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.4s ease, transform 0.4s ease;
+            position: relative;
+        }
+
+        .hidden { display: none !important; opacity: 0; transform: scale(0.9); }
+
+        h1 { color: var(--text-color); font-size: 1.8rem; margin: 10px 0; }
+        p { color: #555; line-height: 1.5; padding: 0 10px; margin-bottom: 20px; }
+        
+        .collage {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+        .collage img {
+            width: 100%;
+            height: 130px;
+            object-fit: cover;
+            border-radius: 15px;
+            background: #f0f0f0;
+        }
+        .collage img.main-gif {
+            grid-column: span 2;
+            height: 200px;
+        }
+
+        .btn-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            width: 100%;
+            align-items: center;
+        }
+
+        /* Horizontal layout for the first stage buttons */
+        #stage-ask .btn-container {
+            flex-direction: row;
+            justify-content: center;
+            height: 50px;
+        }
+
+        button {
+            padding: 12px 25px;
+            font-size: 1rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: 0.2s ease-out;
+            width: 80%;
+        }
+
+        #stage-ask button { width: auto; }
+
+        .btn-yes { background-color: var(--primary-pink); color: white; }
+        .btn-yes:hover { transform: scale(1.05); }
+
+        .btn-option { background-color: white; border: 2px solid var(--primary-pink); color: var(--primary-pink); }
+        .btn-option:hover { background-color: var(--primary-pink); color: white; }
+
+        .btn-no { 
+            background-color: #6c757d; 
+            color: white; 
+            position: absolute; 
+            z-index: 10;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card" id="stage-ask">
+        <h1>Will you be my Valentine? 🌹</h1>
+        <div class="collage">
+            <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHpueG56Znd4ZzJ4ZzJ4ZzJ4ZzJ4ZzJ4ZzJ4ZzJ4ZzJ4ZzJ4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/c76IJLufpNUMo/giphy.gif" class="main-gif" alt="Cute gif">
+        </div>
+        <div class="btn-container">
+            <button class="btn-yes" onclick="showStage('stage-q1')">Yes!</button>
+            <button id="noBtn" class="btn-no" onmouseover="runAway()" style="left: 230px; top: 435px;">No</button>
+        </div>
+    </div>
+
+    <div class="card hidden" id="stage-q1">
+        <h1>The Coffee Test</h1>
+        <p>Choose One</p>
+        <div class="collage">
+            <img src="YOUR_IMAGE_URL_1" alt="Pic 1">
+            <img src="YOUR_IMAGE_URL_2" alt="Pic 2">
+        </div>
+        <div class="btn-container">
+            <button class="btn-option" onclick="checkOption(true, 'stage-q1', 'stage-q2')">Lotus Biscoff Ice Cream Blend</button>
+            <button class="btn-option" onclick="checkOption(false)">Cinnamon Apple Pie Latte</button>
+        </div>
+    </div>
+
+    <div class="card hidden" id="stage-q2">
+        <h1>Let's see if you know me well</h1>
+        <p>Which car do I wanna buy???</p>
+        <div class="collage">
+            <img src="YOUR_IMAGE_URL_3" alt="Pic 3">
+            <img src="YOUR_IMAGE_URL_4" alt="Pic 4">
+        </div>
+        <div class="btn-container">
+            <button class="btn-option" onclick="checkOption(true, 'stage-q2', 'stage-q3')">Bayerische Motoren Werke</button>
+            <button class="btn-option" onclick="checkOption(false)">Mercedes</button>
+        </div>
+    </div>
+
+    <div class="card hidden" id="stage-q3">
+        <h1>Choose wisely</h1>
+        <p>Observe a pattern, know what is important!!!</p>
+        <div class="collage">
+            <img src="YOUR_IMAGE_URL_5" alt="Pic 5">
+            <img src="YOUR_IMAGE_URL_6" alt="Pic 6">
+        </div>
+        <div class="btn-container">
+            <button class="btn-option" onclick="checkOption(true, 'stage-q3', 'stage-final')">6,20,5,10,12</button>
+            <button class="btn-option" onclick="checkOption(false)">1,15,18,22</button>
+        </div>
+    </div>
+
+    <div class="card hidden" id="stage-final">
+        <h1>YAY! ❤️✨</h1>
+        <p>You passed the test, ANVI!!!. I love you sooooo much!!!! Let us have a GREAT FIRST VALENTINE!!</p>
+        <div class="collage">
+            <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNXpueG56Znd4ZzJ4ZzJ4ZzJ4ZzJ4ZzJ4ZzJ4ZzJ4ZzJ4ZzJ4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/KztT2c4u8mYYUiMKdJ/giphy.gif" class="main-gif" alt="Happy Dance">
+        </div>
+    </div>
+
+    <script>
+        function runAway() {
+            const btn = document.getElementById('noBtn');
+            const moveDistance = 150; 
+            let currentX = btn.offsetLeft;
+            let currentY = btn.offsetTop;
+            let newX = currentX + (Math.random() > 0.5 ? moveDistance : -moveDistance);
+            let newY = currentY + (Math.random() > 0.5 ? moveDistance : -moveDistance);
+            newX = Math.max(20, Math.min(newX, window.innerWidth - btn.offsetWidth - 20));
+            newY = Math.max(20, Math.min(newY, window.innerHeight - btn.offsetHeight - 20));
+            btn.style.left = newX + 'px';
+            btn.style.top = newY + 'px';
+        }
+
+        function showStage(stageId) {
+            document.querySelectorAll('.card').forEach(card => card.classList.add('hidden'));
+            document.getElementById(stageId).classList.remove('hidden');
+        }
+
+        function checkOption(isCorrect, currentId, nextId) {
+            if (isCorrect) {
+                showStage(nextId);
+            } else {
+                alert("Incorrect choice, Gang Leader! I think you misclicked... try again! ❤️");
+            }
+        }
+    </script>
+</body>
+</html>
